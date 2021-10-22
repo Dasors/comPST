@@ -19,3 +19,4 @@ Usage: ComPST.ps1 [option] [value] ...
 	   ComPST.ps1 -p COM3 -b 115200
 	   ComPST.ps1 -p COM3 -b 115200 -d 8
 	 Empty [option] will use default values
+
