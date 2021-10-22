@@ -13,7 +13,7 @@ function read-com {
 		$line = $port.ReadExisting()
 		if($line)
 		{
-    		Write-Host -NoNewline $line # Do stuff here
+    		Write-Host -NoNewline $line
 		}
 	}
 	catch [System.Exception]
