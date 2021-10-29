@@ -3,8 +3,8 @@
 # Version: 1.0.0
 
 # ========================= DEFAULT CONFIG =========================================
-$baudrate = 115200
-$comport = "COM3"
+$baudrate = 12000000
+$comport = "COM13"
 $DataBits = 8
 # ========================= FUNCTIONS ==============================================
 
@@ -13,7 +13,7 @@ function read-com {
 		$line = $port.ReadExisting()
 		if($line)
 		{
-    		Write-Host -NoNewline $line
+    		Write-Host -NoNewline $line # Do stuff here
 		}
 	}
 	catch [System.Exception]
@@ -26,6 +26,7 @@ function read-console {
 	{
 	    $key = [Console]::ReadKey($true)
 		$char = $key.KeyChar
+		
 		# Use "!" to close port and exit
 		if($char -eq "!")
 		{
@@ -37,6 +38,46 @@ function read-console {
 		{
 			$port.Write([char]3)
 		}
+		#Arrow Keys
+		elseif($key.key -eq [ConsoleKey]::UpArrow)
+		{
+			$left = [char]27 + "[" + "A"
+			$port.Write($left)
+		}
+		elseif($key.key -eq [ConsoleKey]::DownArrow)
+		{
+			$left = [char]27 + "[" + "B"
+			$port.Write($left)
+		}
+		elseif($key.key -eq [ConsoleKey]::RightArrow)
+		{
+			$left = [char]27 + "[" + "C"
+			$port.Write($left)
+		}
+		elseif($key.key -eq [ConsoleKey]::LeftArrow)
+		{
+			$left = [char]27 + "[" + "D"
+			$port.Write($left)
+		}
+		#Delete Key
+		elseif($key.key -eq [ConsoleKey]::Delete)
+		{
+			$left = [char]27 + "[" + "3" + "~"
+			$port.Write($left)
+		}
+		#Homekey
+		elseif($key.key -eq [ConsoleKey]::Home)
+		{
+			$left = [char]27 + "[" + "7" + "~"
+			$port.Write($left)
+		}
+		#End key
+		elseif($key.key -eq [ConsoleKey]::End)
+		{
+			$left = [char]27 + "[" + "8" + "~"
+			$port.Write($left)
+		}
+		#Send char
 		else
 		{	
 			$port.Write($char)
@@ -89,7 +130,6 @@ function help {
 function vPorts {
 	foreach ($item in [System.IO.Ports.SerialPort]::GetPortNames())
 	{
-		$proceed = $true
 		Write-Host ("--> PortName " + $item)
 	}
 	exit 1
