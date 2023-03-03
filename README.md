@@ -1,6 +1,6 @@
 # comPST
 Simple PowerShell script to access COM Port.
-The defaul configration can be edited in the file
+The default configration can be edited in the file
 
 After connect, use:
 
