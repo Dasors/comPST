@@ -143,6 +143,9 @@ if (($args.Count -ne 0) -and ($args.Count -ne 1) -and ($args.Count -ne 2) -and (
 	exit 1
 }
 
+#set Ctrl+C as input
+[console]::TreatControlCAsInput = $true
+
 if ($args.Count -gt 0)
 {
 	if(($args[0] -eq "--help") -or ($args[0] -eq "-h"))
